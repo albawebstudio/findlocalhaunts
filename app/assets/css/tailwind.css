@@ -1,0 +1,9 @@
+@import './another-danger.css';
+@import './supercreep.css';
+@import './unthinkers.css';
+@tailwind base;
+html {
+    scroll-behavior: smooth;
+}
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,10 @@
+<mj-section>
+
+  <mj-column>
+    <mj-image src="/.netlify/images?url=%2Fimages%2F%2Flogo-navigation-dark.svg" align="center" width="100px"/>
+    <mj-text align="center" color="#FF4500" font-size="24px" font-weight="700">
+      Attention Find Local Haunts Team
+    </mj-text>
+  </mj-column>
+
+</mj-section>
