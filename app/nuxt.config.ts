@@ -39,6 +39,7 @@ export default defineNuxtConfig({
       '@pinia/nuxt',
       'nuxt-utm',
       'nuxt-svgo',
+      'nuxt-security',
     ],
 
     googleFonts: {

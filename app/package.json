@@ -19,6 +19,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@pinia/nuxt": "^0.5.5",
     "nuxt": "^3.13.2",
+    "nuxt-security": "^2.0.0",
     "nuxt-svgo": "^4.0.6",
     "vue": "latest",
     "vue-router": "latest"
