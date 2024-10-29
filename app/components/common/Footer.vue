@@ -24,9 +24,11 @@ const currentYear = date.getFullYear();
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
               <template v-for="(link, index) in site.social_links">
                 <li :class="{ 'mb-4': index < site.social_links.length - 1 }">
-                  <NuxtLink :to="link.to"
-                            :title="link.title"
-                            :external="link.external"
+                  <NuxtLink :to="link.href"
+                            :title="link.label"
+                            external
+                            target="_blank"
+                            noreferrer
                             class="hover:underline ">{{ link.display_title }}</NuxtLink>
                 </li>
               </template>
@@ -54,9 +56,11 @@ const currentYear = date.getFullYear();
         <div class="flex mt-4 sm:justify-center sm:mt-0">
           <template v-for="(link, index) in site.social_links">
             <ClientOnly fallback-tag="span" fallback="Loading mission...">
-              <NuxtLink :to="link.to"
-                        :title="link.title"
-                        :external="link.external"
+              <NuxtLink :to="link.href"
+                        :title="link.label"
+                        external
+                        target="_blank"
+                        noreferrer
                         class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                         :class="{ 'ms-5': index > 0}">
                 <font-awesome-icon :icon="link.icon"/>
