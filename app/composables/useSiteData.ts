@@ -64,7 +64,7 @@ export function useSiteData() {
             bg_color: "x",
             icon: "fa-brands fa-x-twitter",
             display_title: "X",
-            href: "https://x.com/findlocalhaunts/"
+            href: "https://x.com/findlocalhaunt/"
         },
         {
             component: "InstagramSvg",
