@@ -1,15 +1,18 @@
 import type { NitroFetchRequest } from 'nitropack'
+import type { NitroFetchOptions } from "nitropack";
 import type { FetchOptions } from 'ofetch'
 import { useQueryParamStore } from '~/stores/query-params.store'
 
 
-export default async function <T>(path: NitroFetchRequest, opts?: FetchOptions) {
+export default async function useApi<T>(path: NitroFetchRequest, opts?: FetchOptions) {
     const route = useRoute();
 
     const propsToAddToBody: Record<string, any> = {};
 
     // Handle url query param mutations
     const queryStore = useQueryParamStore()
+    console.log(`typeof route.query: ${typeof route.query}`)
+    console.log(`route.query: ${JSON.stringify(route.query)}`)
     if (!isEmpty(route.query)) {
         queryStore.setParameters(route.query)
     }
@@ -18,8 +21,8 @@ export default async function <T>(path: NitroFetchRequest, opts?: FetchOptions) 
         propsToAddToBody['urlQueryParams'] = queryStore.queryParams;
     }
 
-    const headers = process.server ? useRequestHeaders() : {};
-    const request: FetchOptions = {
+    const headers = import.meta.server ? useRequestHeaders() : {};
+    const request: NitroFetchOptions<NitroFetchRequest, any> = {
         ...opts,
 
         headers: {
@@ -29,7 +32,7 @@ export default async function <T>(path: NitroFetchRequest, opts?: FetchOptions) 
 
         body: {
             ...propsToAddToBody,
-            ...(opts?.body as Record<string, string | number>),
+            ...(opts?.body as Record<string, any>),
         },
 
         async onRequestError({ request, options, error }: { request: any; options: any; error: any }) {
@@ -45,5 +48,5 @@ export default async function <T>(path: NitroFetchRequest, opts?: FetchOptions) 
         },
     };
 
-    return (await $fetch(path, request)) as Promise<T>;
+    return $fetch<T>(path, request);
 }
