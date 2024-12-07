@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {ref, shallowRef} from 'vue';
-import {useSiteData} from "~/composables/useSiteData"
-import {useContactData} from "~/composables/useContactData";
+import { ref, shallowRef } from 'vue';
+import { useContactData } from "~/composables/useContactData";
 import Spinner from "~/components/common/Spinner.vue";
 import Success from "~/components/common/Success.vue";
 import ContactForm from "~/components/common/ContactForm.vue";
