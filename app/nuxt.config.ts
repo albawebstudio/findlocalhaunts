@@ -25,11 +25,12 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         newsletterApiKey: process.env.BEEHIIV_API_KEY,
+        recaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY,
         public: {
             beehiivApiUrl: process.env.BEEHIIV_API_URL,
             publicationId: process.env.BEEHIIV_PUBLICATION_ID,
-            apiUrl: process.env.FLH_API_URL
-            /*googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,*/
+            apiUrl: process.env.FLH_API_URL,
+            recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY,
         }
     },
 
@@ -64,4 +65,12 @@ export default defineNuxtConfig({
             },
         },
     },
+
+    security: {
+        headers: {
+            crossOriginResourcePolicy: 'cross-origin',
+            crossOriginOpenerPolicy: 'same-origin',
+            crossOriginEmbedderPolicy: false
+        }
+    }
 })

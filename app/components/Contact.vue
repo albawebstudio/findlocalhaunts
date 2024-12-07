@@ -1,17 +1,34 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue';
-import { useSiteData } from "~/composables/useSiteData"
-import { useContactData } from "~/composables/useContactData";
+import {ref, shallowRef} from 'vue';
+import {useSiteData} from "~/composables/useSiteData"
+import {useContactData} from "~/composables/useContactData";
 import Spinner from "~/components/common/Spinner.vue";
 import Success from "~/components/common/Success.vue";
 import ContactForm from "~/components/common/ContactForm.vue";
-import LogoSvg from "/public/logo/logo-1.svg";
+/*import useGoogleRecaptcha, {
+  RecaptchaAction,
+} from "~/composables/useGoogleRecaptcha";*/
+import {useReCaptcha} from 'vue-recaptcha-v3';
+import type {GoogleRecaptchaResponse} from "~/models/types/google-recaptcha-response";
 
 const config = useRuntimeConfig()
 const apiKey = config.public.googleMapsApiKey
 const apiUrl = config.public.apiUrl
 
+const recaptchaInstance = useReCaptcha();
+const recaptcha = async () => {
+  // optional you can await for the reCaptcha load
+  await recaptchaInstance?.recaptchaLoaded();
+  // get the token, a custom action could be added as argument to the method
+  return recaptchaInstance?.executeRecaptcha('submitForm');
+};
 
+// If you need to expose the method to a template or parent component
+defineExpose({
+  recaptcha
+});
+
+// const { executeRecaptcha } = useGoogleRecaptcha();
 const { contact } = useContactData()
 const { getEmailByAccount } = useSiteData()
 const email = getEmailByAccount('support')
@@ -21,6 +38,7 @@ interface FormData {
   subject: string,
   email: string,
   message: string,
+  token: string | undefined,
 }
 
 const showSpinner = shallowRef(false);
@@ -32,6 +50,7 @@ const getInitialFormData = (): FormData => ({
   subject: "",
   email: "",
   message: "",
+  token: "",
 });
 
 const form = ref<FormData>(getInitialFormData());
@@ -55,8 +74,26 @@ const submitForm = async () => {
     return;
   }
   try{
+    //const { token } = await executeRecaptcha(RecaptchaAction.login);
+    const token = await recaptcha();
+    console.log(`token: ${token}`);
+    const verificationResponse = await useApi<GoogleRecaptchaResponse>('/api/recaptcha', {
+      method: 'POST',
+      body: {
+        token
+      }
+    })
+    console.log(`verificationResponse:`, verificationResponse);
+
+    if (!verificationResponse.success) {
+      throw new Error('reCAPTCHA verification failed');
+    }
+
     const response = await fetch(`${apiUrl}/contact-form`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(form.value),
     } )
     if (!response.ok) {
