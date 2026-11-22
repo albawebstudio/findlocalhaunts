@@ -4,22 +4,15 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-        }
+        },
     },
 
     compatibilityDate: '2024-04-03',
 
-    devtools: {enabled: true},
-
-    postcss: {
-        plugins: {
-            tailwindcss: {},
-            autoprefixer: {},
-        },
-    },
+    devtools: { enabled: true },
 
     css: [
-        '/assets/css/tailwind.css',
+        '~/assets/css/main.css',
         '@fortawesome/fontawesome-svg-core/styles.css',
     ],
 
@@ -31,31 +24,60 @@ export default defineNuxtConfig({
             publicationId: process.env.BEEHIIV_PUBLICATION_ID,
             apiUrl: process.env.FLH_API_URL,
             recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY,
-        }
+        },
     },
 
     modules: [
-      '@nuxtjs/google-fonts',
-      'nuxt-lodash',
-      '@pinia/nuxt',
-      'nuxt-utm',
-      'nuxt-svgo',
-      'nuxt-security',
+        '@nuxt/ui',
+        'nuxt-utm',
+        'nuxt-svgo',
+        'nuxt-security',
     ],
 
-    googleFonts: {
-        families: {
-            Oswald: {
-                wght: [300, 500, 700, 800]
+    imports: {
+        presets: [
+            {
+                from: 'lodash-es',
+                imports: ['isEmpty', 'forOwn'],
             },
-            Lato: [100, 300],
-            Raleway: {
-                wght: [100, 300, 500, 700, 900],
-                ital: [100, 300, 500, 700, 900],
-            },
+        ],
+    },
+
+    // @nuxt/fonts (bundled with @nuxt/ui) replaces @nuxtjs/google-fonts
+    fonts: {
+        defaults: {
+            styles: ['normal'],
         },
-        display: 'swap',
-        preload: true
+        families: [
+            {
+                name: 'Oswald',
+                provider: 'google',
+                weights: [300, 500, 700, 800],
+            },
+            {
+                name: 'Lato',
+                provider: 'google',
+                weights: [100, 300],
+            },
+            {
+                name: 'Raleway',
+                provider: 'google',
+                weights: [100, 300, 500, 700, 900],
+                styles: ['normal', 'italic'],
+            },
+        ],
+    },
+
+    nitro: {
+        // cloudflare-pages: prerendered HTML + Pages Functions for /api/*
+        // Use NITRO_PRESET=static + `nuxt generate` only if APIs move off-site
+        preset: process.env.NITRO_PRESET || 'cloudflare-pages',
+    },
+
+    routeRules: {
+        '/': { prerender: true },
+        '/terms': { prerender: true },
+        '/privacy': { prerender: true },
     },
 
     vite: {
@@ -70,7 +92,7 @@ export default defineNuxtConfig({
         headers: {
             crossOriginResourcePolicy: 'cross-origin',
             crossOriginOpenerPolicy: 'same-origin',
-            crossOriginEmbedderPolicy: false
-        }
-    }
+            crossOriginEmbedderPolicy: false,
+        },
+    },
 })
