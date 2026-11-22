@@ -1,0 +1,99 @@
+@import './fonts.css';
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+html {
+    scroll-behavior: smooth;
+}
+
+@theme {
+    --color-vermilion: #FF4500;
+    --color-vermilion-50: #FFCBB8;
+    --color-vermilion-100: #FFBCA3;
+    --color-vermilion-200: #FF9E7A;
+    --color-vermilion-300: #FF8152;
+    --color-vermilion-400: #FF6329;
+    --color-vermilion-500: #FF4500;
+    --color-vermilion-600: #C73600;
+    --color-vermilion-700: #8F2700;
+    --color-vermilion-800: #571700;
+    --color-vermilion-900: #1F0800;
+    --color-vermilion-950: #030100;
+
+    --color-persimmon: #FF6347;
+    --color-persimmon-50: #FFFFFF;
+    --color-persimmon-100: #FFEDEA;
+    --color-persimmon-200: #FFCBC1;
+    --color-persimmon-300: #FFA899;
+    --color-persimmon-400: #FF8670;
+    --color-persimmon-500: #FF6347;
+    --color-persimmon-600: #FF330F;
+    --color-persimmon-700: #D62100;
+    --color-persimmon-800: #9E1800;
+    --color-persimmon-900: #660F00;
+    --color-persimmon-950: #4A0B00;
+
+    --color-orange: #FFA500;
+    --color-orange-50: #FFE6B8;
+    --color-orange-100: #FFDFA3;
+    --color-orange-200: #FFD07A;
+    --color-orange-300: #FFC252;
+    --color-orange-400: #FFB329;
+    --color-orange-500: #FFA500;
+    --color-orange-600: #C78100;
+    --color-orange-700: #8F5C00;
+    --color-orange-800: #573800;
+    --color-orange-900: #1F1400;
+    --color-orange-950: #030200;
+
+    --color-primary: var(--color-vermilion-500);
+    --color-primary-50: var(--color-vermilion-50);
+    --color-primary-100: var(--color-vermilion-100);
+    --color-primary-200: var(--color-vermilion-200);
+    --color-primary-300: var(--color-vermilion-300);
+    --color-primary-400: var(--color-vermilion-400);
+    --color-primary-500: var(--color-vermilion-500);
+    --color-primary-600: var(--color-vermilion-600);
+    --color-primary-700: var(--color-vermilion-700);
+    --color-primary-800: var(--color-vermilion-800);
+    --color-primary-900: var(--color-vermilion-900);
+    --color-primary-950: var(--color-vermilion-950);
+
+    --color-secondary: var(--color-persimmon-500);
+    --color-secondary-50: var(--color-persimmon-50);
+    --color-secondary-100: var(--color-persimmon-100);
+    --color-secondary-200: var(--color-persimmon-200);
+    --color-secondary-300: var(--color-persimmon-300);
+    --color-secondary-400: var(--color-persimmon-400);
+    --color-secondary-500: var(--color-persimmon-500);
+    --color-secondary-600: var(--color-persimmon-600);
+    --color-secondary-700: var(--color-persimmon-700);
+    --color-secondary-800: var(--color-persimmon-800);
+    --color-secondary-900: var(--color-persimmon-900);
+    --color-secondary-950: var(--color-persimmon-950);
+
+    --color-tertiary: var(--color-orange-500);
+    --color-tertiary-50: var(--color-orange-50);
+    --color-tertiary-100: var(--color-orange-100);
+    --color-tertiary-200: var(--color-orange-200);
+    --color-tertiary-300: var(--color-orange-300);
+    --color-tertiary-400: var(--color-orange-400);
+    --color-tertiary-500: var(--color-orange-500);
+    --color-tertiary-600: var(--color-orange-600);
+    --color-tertiary-700: var(--color-orange-700);
+    --color-tertiary-800: var(--color-orange-800);
+    --color-tertiary-900: var(--color-orange-900);
+    --color-tertiary-950: var(--color-orange-950);
+
+    --color-light: #FFFFFF;
+    --color-dark: #2C1B0E;
+
+    --font-sans: "Raleway", "Lato", ui-sans-serif, system-ui, sans-serif;
+    --font-body: var(--font-sans);
+    --font-another-danger: "Another Danger", ui-sans-serif, sans-serif;
+    --font-oswald: "Oswald", ui-sans-serif, sans-serif;
+    --font-supercreep: "Supercreep", ui-sans-serif, sans-serif;
+    --font-unthinkers: "Unthinkers", ui-sans-serif, sans-serif;
+
+    --background-image-overlay-dark: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url("/images/bg01.jpg");
+}

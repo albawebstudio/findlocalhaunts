@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef, toRaw } from 'vue'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import type {CreateSubscriptionResponse} from "~/models/types/create-subscription-response"
+import type { CreateSubscriptionResponse } from "~/models/types/create-subscription-response"
 
 // Component state
 const state = ref<{
@@ -24,12 +24,14 @@ interface FormData {
   send_welcome_email: boolean,
 }
 
+const utmParams = computed(() => utm.value?.[0]?.utmParams ?? {})
+
 const getInitialFormData = (): FormData => ({
   email: "",
-  utm_source: utm.value[0]?.utmParams.utm_source || 'findlocalhaunts.com',
-  utm_medium: utm.value[0]?.utmParams.utm_medium || 'organic',
-  utm_channel: utm.value[0]?.utmParams.utm_channel || '',
-  utm_campaign: utm.value[0]?.utmParams.utm_campaign || '',
+  utm_source: utmParams.value?.utm_source || 'findlocalhaunts.com',
+  utm_medium: utmParams.value?.utm_medium || 'organic',
+  utm_channel: utmParams.value?.utm_channel || '',
+  utm_campaign: utmParams.value?.utm_campaign || '',
   reactivate_existing: true,
   send_welcome_email: true,
 })

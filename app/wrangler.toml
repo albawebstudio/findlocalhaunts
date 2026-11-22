@@ -1,0 +1,11 @@
+# Cloudflare Pages — output from `pnpm run build` with nitro.preset `cloudflare-pages`
+# Dashboard: root `app`, build `pnpm run build`, output directory `dist`
+name = "find-local-haunts"
+compatibility_date = "2024-04-03"
+pages_build_output_dir = "dist"
+
+# Environment-specific variables
+[vars]
+BEEHIIV_API_URL = "https://api.beehiiv.com/v2/"
+BEEHIIV_PUBLICATION_ID = "pub_ecd4c3d6-71d3-462f-90a8-33aed0489ba2"
+FLH_API_URL = "https://q2lnolt6o2.execute-api.us-east-1.amazonaws.com/development"
